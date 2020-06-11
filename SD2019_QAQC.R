@@ -11,18 +11,23 @@ library(lubridate)
 library(vegan)
 library(gridExtra)
 
-#################
-# 1st year 2008 #
+# File path setup:
+if (dir.exists('/Users/kellyloria/Documents/Niwot\ LTER\ 2017-2019/Mesocosm\ tanks/HOBO_QAQC/2019MesoPilot_HOBOQ/')){
+  inputDir<- '/Users/kellyloria/Documents/Niwot\ LTER\ 2017-2019/Mesocosm\ tanks/HOBO_QAQC/2019MesoPilot_HOBOQ/'
+  outputDir<- '/Users/kellyloria/Desktop/' 
+}
 
+
+## ---------------------------
+# Important note:
 # Sensor limits:
-## Range: 
 #    Temperature: -20° to 50°C (-4° to 158°F)
 #    Light: 0 to 320,000 lux (0 to 30,000 lumens/ft2) 
 
 ## Science discovery color trial tank 1 top sensor ##
 #############
 # switched around column names to get rid of symbols
-SDC_1LT <- read.csv("SDC_1LS_20261887.csv")
+SDC_1LT <- read.csv(paste0(inputDir, "/SDC_1LS_20261887.csv"), header=T)
 names(SDC_1LT)
 
 # check timestamp
@@ -578,3 +583,5 @@ allhoboplot <- ggplot(data = AllTankAve,
 ggsave(filename = "2019Toplargeplot.pdf", allhoboplot, scale = 0.75, width = 40,
        height = 20, units = c("cm"),
        dpi = 300)
+
+getwd()
