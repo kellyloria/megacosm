@@ -68,12 +68,22 @@ ggplot(data=e, aes(x=observation.number, y=number_dead, fill=Sex)) +
 f <- read.csv("zoop_mortalitysex.csv")
 names(f)
 
+# fix date variable:
+f$timestamp1 <- as.POSIXct(f$timestamp, format="%m/%d/%Y %H:%M")
+range(f$timestamp1)
+
 sizeTODplot <- ggplot(data = f) +
-  geom_point(aes(x = observation.number, y = F_deadT_jitter), color="#8c4553") + 
-  geom_line(aes(x = observation.number, y = F_deadT_jitter), color="#8c4553") +
-  geom_point(aes(x = observation.number, y = G_deadT_jitter), color="#a6858c") + 
-  geom_line(aes(x = observation.number, y = G_deadT_jitter), color="#a6858c") +
-  geom_point(aes(x = observation.number, y = M_deadT), color="#466782") + 
-  geom_line(aes(x = observation.number, y = M_deadT), color="#466782") +
-  labs( x = "Observation number", y = "Number dead") + 
+  geom_point(aes(x = timestamp1, y = per.Fdead), size= 2, color=  alpha(c("#e01809"), 0.7)) + 
+  geom_line(aes(x = timestamp1, y = per.Fdead), size= 1.2, color=  alpha(c("#e01809"), 0.7)) +
+  geom_point(aes(x = timestamp1, y = per.Gdead), size= 2, color=  alpha(c("#8a50a1"), 0.7)) + 
+  geom_line(aes(x = timestamp1, y = per.Gdead), size= 1.2, color=  alpha(c("#8a50a1"), 0.7)) +
+  geom_point(aes(x = timestamp1, y = per.Mdead), size= 2, color=  alpha(c("#1881cc"), 0.7)) + 
+  geom_line(aes(x = timestamp1, y = per.Mdead), size= 1.2, color=  alpha(c("#1881cc"), 0.7)) +
+  scale_x_datetime(date_breaks = "24 hour", labels = date_format("%b %d")) + 
+  scale_y_continuous(breaks=seq(0,1,0.2)) +
+  labs( x = "Observation number", y = "Proportion population dead") + 
   theme_bw() 
+
+ggsave(filename = "sizeTODplot.jpeg", sizeTODplot, scale = 0.75, width = 15,
+       height = 12, units = c("cm"),
+       dpi = 300)
