@@ -12,8 +12,8 @@ library(vegan)
 library(gridExtra)
 
 # File path setup:
-if (dir.exists('/Users/kellyloria/Documents/Niwot\ LTER\ 2017-2019/Mesocosm\ tanks/HOBO_QAQC/2019MesoPilot_HOBOQ/')){
-  inputDir<- '/Users/kellyloria/Documents/Niwot\ LTER\ 2017-2019/Mesocosm\ tanks/HOBO_QAQC/2019MesoPilot_HOBOQ/'
+if (dir.exists('/Users/kellyloria/Documents/Niwot LTER 2017-2019/Mesocosm/MegacomsPilot/Megacosm/')){
+  inputDir<- '/Users/kellyloria/Documents/Niwot LTER 2017-2019/Mesocosm/MegacomsPilot/Megacosm'
   outputDir<- '/Users/kellyloria/Desktop/' 
 }
 
