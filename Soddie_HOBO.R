@@ -12,6 +12,7 @@ library(ggplot2)
 library(dplyr)
 library(lubridate)
 library(tidyverse)
+library(zoo)
 
 ## ---------------------------
 # File path setup:
@@ -38,8 +39,92 @@ qplot(timestamp, TempC, data = MRS_1He, geom="point") +
   #scale_x_datetime(date_breaks = "504 hour", labels = date_format("%b %d")) +
   theme(axis.text.x = element_text(angle = 25, vjust = 1.0, hjust = 1.0))
 
+MRS_1Se <- read.csv(paste0(inputDir, "/2019_Soddie/Soddie_HOBO_2019/MRS_1S_biege_20483162_Q.csv"), header=T)
+names(MRS_1Se)
+MRS_1Se$timestamp <- as.POSIXct(MRS_1Se$Date.Time..GMT.06.00, format="%m/%d/%Y %H:%M")
+range(MRS_1He$timestamp)
 
-### End of summer data ###
+
+MRS_2Se <- read.csv(paste0(inputDir, "/2019_Soddie/Soddie_HOBO_2019/MRS_2S_black_20483164_Q.csv"), header=T)
+names(MRS_2Se)
+MRS_2Se$timestamp <- as.POSIXct(MRS_2Se$Date.Time..GMT.06.00, format="%m/%d/%Y %H:%M")
+range(MRS_2Se$timestamp)
+
+MRS_2He <- read.csv(paste0(inputDir, "/2019_Soddie/Soddie_HOBO_2019/MRS_2H_black_20483165_Q.csv"), header=T)
+names(MRS_2He)
+# 2. Fix timestamp
+MRS_2He$timestamp <- as.POSIXct(MRS_2He$Date.Time..GMT.06.00, format="%m/%d/%Y %H:%M")
+range(MRS_2He$timestamp)
+
+MRS_3He <- read.csv(paste0(inputDir, "/2019_Soddie/Soddie_HOBO_2019/MRS_3H_biege_large_20483173_Q.csv"), header=T)
+names(MRS_3He)
+# 2. Fix timestamp
+MRS_3He$timestamp <- as.POSIXct(MRS_3He$Date.Time..GMT.06.00, format="%m/%d/%Y %H:%M")
+range(MRS_3He$timestamp)
+
+MRS_3Se <- read.csv(paste0(inputDir, "/2019_Soddie/Soddie_HOBO_2019/MRS_3S_biege_large_20483172_Q.csv"), header=T)
+names(MRS_3Se)
+MRS_3Se$timestamp <- as.POSIXct(MRS_3Se$Date.Time..GMT.06.00, format="%m/%d/%Y %H:%M")
+range(MRS_3Se$timestamp)
+
+MRS_4He <- read.csv(paste0(inputDir, "/2019_Soddie/Soddie_HOBO_2019/MRS_4H_black_20483169_Q.csv"), header=T)
+names(MRS_4He)
+# 2. Fix timestamp
+MRS_4He$timestamp <- as.POSIXct(MRS_4He$Date.Time..GMT.06.00, format="%m/%d/%Y %H:%M")
+range(MRS_4He$timestamp)
+
+MRS_4Se <- read.csv(paste0(inputDir, "/2019_Soddie/Soddie_HOBO_2019/MRS_4S_black_20483168_Q.csv"), header=T)
+names(MRS_4Se)
+MRS_4Se$timestamp <- as.POSIXct(MRS_4Se$Date.Time..GMT.06.00, format="%m/%d/%Y %H:%M")
+range(MRS_4Se$timestamp)
+
+MRS_5He <- read.csv(paste0(inputDir, "/2019_Soddie/Soddie_HOBO_2019/MRS_5H_biege_20483167_Q.csv"), header=T)
+names(MRS_5He)
+# 2. Fix timestamp
+MRS_5He$timestamp <- as.POSIXct(MRS_5He$Date.Time..GMT.06.00, format="%m/%d/%Y %H:%M")
+range(MRS_5He$timestamp)
+
+MRS_5Se <- read.csv(paste0(inputDir, "/2019_Soddie/Soddie_HOBO_2019/MRS_5S_beige_20483166_Q.csv"), header=T)
+names(MRS_5Se)
+MRS_5Se$timestamp <- as.POSIXct(MRS_5Se$Date.Time..GMT.06.00, format="%m/%d/%Y %H:%M")
+range(MRS_5Se$timestamp)
+
+MRS_6He <- read.csv(paste0(inputDir, "/2019_Soddie/Soddie_HOBO_2019/MRS_6H_black_large_20483171_Q.csv"), header=T)
+names(MRS_6He)
+# 2. Fix timestamp
+MRS_6He$timestamp <- as.POSIXct(MRS_6He$Date.Time..GMT.06.00, format="%m/%d/%Y %H:%M")
+range(MRS_6He$timestamp)
+
+MRS_6Se <- read.csv(paste0(inputDir, "/2019_Soddie/Soddie_HOBO_2019/MRS_6S_black_large_20483170_Q.csv"), header=T)
+names(MRS_6Se)
+# 2. Fix timestamp
+MRS_6Se$timestamp <- as.POSIXct(MRS_6Se$Date.Time..GMT.06.00, format="%m/%d/%Y %H:%M")
+range(MRS_6Se$timestamp)
+
+MRS_7He <- read.csv(paste0(inputDir, "/2019_Soddie/Soddie_HOBO_2019/MRS_7H_biege_20483175_Q.csv"), header=T)
+names(MRS_7He)
+# 2. Fix timestamp
+MRS_7He$timestamp <- as.POSIXct(MRS_7He$Date.Time..GMT.06.00, format="%m/%d/%Y %H:%M")
+range(MRS_7He$timestamp)
+
+MRS_7Se <- read.csv(paste0(inputDir, "2019_Soddie/Soddie_HOBO_2019/MRS_7S_biege_20483174_Q.csv"), header=T)
+names(MRS_7Se)
+# 2. Fix timestamp
+MRS_7Se$timestamp <- as.POSIXct(MRS_7Se$Date.Time..GMT.06.00, format="%m/%d/%Y %H:%M")
+range(MRS_7Se$timestamp)
+
+MRS_8He <- read.csv(paste0(inputDir, "/2019_Soddie/Soddie_HOBO_2019/MRS_8H_black_20483177_Q.csv"), header=T)
+names(MRS_8He)
+# 2. Fix timestamp
+MRS_8He$timestamp <- as.POSIXct(MRS_8He$Date.Time..GMT.06.00, format="%m/%d/%Y %H:%M")
+range(MRS_8He$timestamp)
+
+MRS_8Se <- read.csv(paste0(inputDir, "/2019_Soddie/Soddie_HOBO_2019/MRS_8S_black_20483176_Q.csv"), header=T)
+names(MRS_8Se)
+# 2. Fix timestamp
+MRS_8Se$timestamp <- as.POSIXct(MRS_8Se$Date.Time..GMT.06.00, format="%m/%d/%Y %H:%M")
+range(MRS_8Se$timestamp)
+
 
 ## ---------------------------
 # Individual tanks: Soddie 1
@@ -162,7 +247,7 @@ qplot(timestamp, TempC, data = MRS_4Hl, geom="point") +
   #scale_x_datetime(date_breaks = "504 hour", labels = date_format("%b %d")) +
   theme(axis.text.x = element_text(angle = 25, vjust = 1.0, hjust = 1.0))
 
-MRS_4Sl <- read.csv(paste0(inputDir, "/2019_Soddie/Soddie_HOBO_2019/SummerRawHOBO/19SOD_4S_20261888_0.csv"), header=T)
+MRS_4Sl <- read.csv(paste0(inputDir, "/2019_Soddie/Soddie_HOBO_2019/SummerRawHOBO/19SOD_4S_20261888.csv"), header=T)
 names(MRS_4Sl)
 
 # 2. Fix timestamp
@@ -304,9 +389,82 @@ qplot(timestamp, TempC, data = MRS_8Sl, geom="point") +
 
 
 ## ---------------------------
-#rbind: MRS_1He, 
-Soddie_l <- rbind(MRS_1Sl, MRS_2Hl, MRS_2Sl, MRS_3Hl, MRS_3Sl, 
+# Aggregate data: 
+Soddie_l <- rbind(MRS_1Hl, MRS_1Sl, MRS_2Hl, MRS_2Sl, MRS_3Hl, MRS_3Sl, 
                   MRS_4Hl, MRS_4Sl,MRS_5Hl, MRS_5Sl, MRS_6Sl, 
                   MRS_7Hl, MRS_7Sl,MRS_8Sl)
-names(MRS_2Hl)
+summary(Soddie_l)
+
+Soddie_e <- rbind(MRS_1He, MRS_1Se, MRS_2He, MRS_2Se, MRS_3He, MRS_3Se,
+                  MRS_4He, MRS_4Se, MRS_5He, MRS_5Se, MRS_6He, MRS_6Se,
+                  MRS_7He, MRS_7Se, MRS_8He, MRS_8Se)
+
+Soddie <- rbind(Soddie_e, Soddie_l)
+summary(Soddie_e)
+summary(Soddie$Tank)
+
+## ---------------------------
+# QAQC data: 
+
+# 1. Flag temperature values:
+Soddie.Q=Soddie %>% 
+  mutate(temperature=ifelse(TempC>35, NA, TempC)) %>%
+  mutate(hour=lubridate::hour(timestamp))%>%
+  arrange(Tank, Position, timestamp)%>%
+  group_by(Tank, Position, timestamp)%>% #this will get the nearest 15, but could be fewer if some are missing OR >35C, I think (?) the 35 are bogus so that is ok but you could
+  mutate(mnT=rollapply(temperature, width = 15, FUN = mean, fill=NA),           # also filter out the NAs and >35s if you wanted to always have 15 values in your rolling window after removing bad values
+         sdT=rollapply(temperature, width = 15, FUN = sd, fill=NA)) %>%
+  mutate(loT=mnT- (3*sdT), hiT=mnT+ (3*sdT))%>%
+  mutate(mnL=rollapply(IntensityLux, width = 15, FUN = mean, fill=NA),           # also filter out the NAs and >35s if you wanted to always have 15 values in your rolling window after removing bad values
+         sdL=rollapply(IntensityLux, width = 15, FUN = sd, fill=NA)) %>%
+  mutate(loL=mnL- (3*sdL), hiL=mnL+ (3*sdL))%>%
+  full_join(., Soddie)%>% 
+  mutate(
+    flag_temperature=
+      case_when( #may as well add the m in here since your metadata days that flag was used
+        is.na(temperature) ~ 'm',
+        temperature>35 ~ 'q',
+        temperature<loT&!is.na(loT) ~ 'o',
+        temperature>hiT&!is.na(hiT) ~ 'o',
+        temperature<0 ~ 'q', TRUE ~ 'n')) %>%
+  mutate(
+    flag_Lux=
+      case_when( #may as well add the m in here since your metadata days that flag was used
+        is.na(IntensityLux) ~ 'm',
+        IntensityLux<loL&!is.na(loL) ~ 'o',
+        IntensityLux>hiL&!is.na(hiL) ~ 'o',
+        IntensityLux<0 ~ 'q', TRUE ~ 'n'))
+
+# 2.Check the QAQC
+p <- ggplot(Soddie.Q, aes(x=timestamp, y=(temperature), colour =as.factor(flag_temperature), shape= Position)) +
+  geom_point(alpha = 0.7)  +
+  theme_classic() + facet_wrap(~Tank)
+
+p2 <- ggplot(Soddie.Q, aes(x=timestamp, y=(IntensityLux), colour =as.factor(flag_Lux), shape= Position)) +
+  geom_point(alpha = 0.7)  +
+  theme_classic() + facet_wrap(~Tank)
+
+names(Soddie.Q)
+
+# 3. Remove unwanted variables:
+Soddie.Q2 <- subset(Soddie.Q, select=c(Tank, timestamp, temperature, IntensityLux,
+                                             Sensor, Position, Color, flag_temperature, flag_Lux))
+
+# 4. Double chec for duplicated values:
+Soddie.Q2%>%select(Tank, Position, timestamp)%>%duplicated()%>%sum() # 2 dups
+
+View(Soddie.Q2%>%
+       inner_join(
+         Soddie.Q2 %>%
+           group_by(Tank, Position, timestamp) %>%
+           summarize(ct=dplyr::n())%>% filter(ct>1)))
+
+# Remove values:
+Soddie.Q3 = Soddie.Q2 %>%
+  distinct(Tank, Position, timestamp, .keep_all = TRUE)
+
+Soddie.Q3%>%select(Tank, Position, timestamp)%>%duplicated()%>%sum() 
+
+# 5. Export and save data:
+# write.csv(Soddie.Q3, paste0(outputDir, "SoddieHOBO_Q.csv")) # complied data file of all DO sensors along buoy line
 
