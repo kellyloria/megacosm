@@ -13,6 +13,9 @@ library(dplyr)
 library(lubridate)
 library(tidyverse)
 library(zoo)
+library(lmerTest)
+library(lme4)
+
 ## ---------------------------
 # File path setup:
 if (dir.exists('/Users/kellyloria/Documents/Niwot\ LTER\ 2017-2019/Mesocosm/')){
@@ -411,5 +414,23 @@ SandCorn.Q2%>%select(Tank_ID, HOBO_position, timestamp)%>%duplicated()%>%sum() #
 # 5. Export and save data:
 # write.csv(SandCorn.Q2, paste0(outputDir, "SC2020HOBO_Q.csv")) # complied data file of all DO sensors along buoy line
 
+## ---------------------------
+# Analyze the data:
+summary(SandCorn.Q2)
+# remove outliers 
+SandCorn.Q3 <- subset(SandCorn.Q2, flag_temperature=="n")
+summary(SandCorn.Q3)
 
+SandCorn.Q4 <- subset(SandCorn.Q3, timestamp >= as.POSIXct('0020-04-27 00:00:00') & timestamp <= as.POSIXct('0020-06-11 00:00:00'))
+summary(SandCorn.Q4$timestamp)
+ 
+hist(SandCorn.Q4$temperature)
+SC.mod <- t.test(temperature~Color, data = SandCorn.Q4)
+summary(SC.mod)
+
+SC.mod2 <- glm(temperature~Color, data = SandCorn.Q4)
+summary(SC.mod2)
+
+SC.mod3 <- lmer(temperature ~ Color + (1|Block), data = SandCorn.Q4)
+summary(SC.mod3)
 
