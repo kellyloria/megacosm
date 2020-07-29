@@ -433,4 +433,6 @@ summary(SC.mod2)
 
 SC.mod3 <- lmer(temperature ~ Color + (1|Block), data = SandCorn.Q4)
 summary(SC.mod3)
+hist(residuals(SC.mod3)) # not the greatest residuL distribution
+
 
